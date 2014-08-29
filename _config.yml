@@ -1,10 +1,9 @@
+title: "Code for Germany"
+description: "Stadt&lt;entwickler /&gt;nutzen offene Daten um ihre Stadt zu verbessern"
+url: http://codefor.de
 markdown: kramdown
 exclude: ["vendor"]
-permalink: /:categories/:title
-excerpt_separator: "\n\n"
+permalink: /blog/:title
+excerpt_separator: "\n"
 paginate: 5
-paginate_path: "news/:num"
-collections:
-  projekte:
-    output: true
-    permalink: /projekte/:path/
+paginate_path: "blog/:num"

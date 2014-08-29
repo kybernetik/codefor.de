@@ -1,42 +1,23 @@
 ---
 layout: base
-title: Projects
+title: Alle Projekte
 
 ---
-
 
 <!-- Projekte -->
 <div class="jumbotron fond__blue">
   <div class="container">
     <div class="clearfix">
     <h3 class="pull-left">Alle Projekte</h3>
-    <span class="h4 pull-right"><a href="/projekte">Projekt Showcase</a></span>
+    <span class="h4 pull-right"><a href="/projekte">Projekt Showcase...</a></span>
     </div>
 
-    <div class="packery-container">
-      <div class="packery-item-gutter"></div>
-      {% for post in site.projekte %}
-        <div class="packery-item" >
-          {% include project-teaser.html %}
-        </div>
+      {% for sitepage in site.pages %}
+		{% if sitepage.layout == 'project' %}
+       	 {% include project-teaser-slim.html %}
+       	{% endif %}
+
       {% endfor %}
-    </div>
   </div>
 </div>
 <!-- Projekte End -->
-
-<script src="/js/lib/packery.pkgd.min.js"></script>
-<script src="/js/lib/imagesloaded.pkgd.min.js"></script>
-<script src="/js/PackeryGrid.js"></script>
-
-<script src="/js/lib/prettyCheckbox.min.js"></script>
-<script type="text/javascript">
-
-$(document).ready(function() {
-  
-  packery = new PackeryGrid('.packery-container','.packery-item', '.packery-item-gutter');
-  // $(":checkbox").prettyCheckbox();
-
-});
-
-</script>

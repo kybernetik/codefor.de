@@ -19,7 +19,7 @@ layout: base
     <div class="row">
       <div class="col-lg-6">
         <h1 class="highlight-white"> {{ page.title }} </h1>
-        <p>{{ page.content | markdownify }}</p>
+        {{ page.content | markdownify }}
       </div>
       <div class="col-lg-6">
         
@@ -103,23 +103,38 @@ layout: base
 <!-- Termine End -->
 
 <!-- Projekte -->
-{% unless project_count == 0 %}
+{% assign project_count = 0 %}
+{% for sitepage in site.pages %}
+ {% if page.lab == sitepage.lab %}
+   {% capture project_count %}{{ project_count | plus:1 }}{% endcapture %}
+  {% endif %}
+{% endfor %}
+<!-- remove the ok lab's page -->
+{% capture project_count %}{{ project_count | minus:1 }}{% endcapture %}
+{% unless project_count == '0' %}
 <div class="jumbotron fond__blue">
   <div class="container">
     <h3 id="projects">Projekte</h3> 
+    <div class="loading">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <div>...laden...</div>
+      </div>
     <div class="packery-container">
       <div class="packery-item-gutter"></div>
-      {% for post in site.projekte %}
-        {% if post.lab == page.lab %}
-        <div class="packery-item" >
-          {% include project-teaser.html type='post' %}
-        </div>
+      {% for sitepage in site.pages  %}
+        {% if page.lab == sitepage.lab %}
+          {% if sitepage.layout == 'project' %}
+          <div class="packery-item" >
+           {% include project-teaser.html type='page' %}
+         </div>
+          {% endif %}
         {% endif %}
       {% endfor %}
     </div>
   </div>
 </div>
-{%endunless%}
+{% endunless %}
+
 <!-- Projekte End -->
 
 <!-- Mitglieder-->
